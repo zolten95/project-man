@@ -227,9 +227,29 @@ export async function getTeamMembers() {
     };
   }
 
-  // If we have team members, return them
+  // If we have team members, normalize the data to ensure profile is always an object or null
   if (teamMembersData && teamMembersData.length > 0) {
-    return { data: teamMembersData };
+    return { 
+      data: teamMembersData.map(member => {
+        // Handle case where profile might be an array or object
+        let profile = null;
+        if (member.profile) {
+          if (Array.isArray(member.profile)) {
+            // If profile is an array, take the first element
+            profile = member.profile[0] || null;
+          } else {
+            // If profile is already an object, use it directly
+            profile = member.profile;
+          }
+        }
+        
+        return {
+          user_id: member.user_id,
+          role: member.role,
+          profile: profile
+        };
+      })
+    };
   }
 
   // Fallback: if no team members found, get all users with profiles
