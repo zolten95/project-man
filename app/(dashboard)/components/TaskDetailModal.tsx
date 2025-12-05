@@ -11,7 +11,7 @@ interface TaskDetailModalProps {
   taskId: string;
   isOpen: boolean;
   onClose: () => void;
-  onTaskUpdated?: (taskId?: string, updates?: Partial<{ status: string }>) => void;
+  onTaskUpdated?: (taskId?: string, updates?: Partial<{ status: string; total_tracked_minutes?: number | null }>) => void;
 }
 
 interface TaskDetails {
