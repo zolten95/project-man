@@ -61,7 +61,7 @@ export default function MyTasksPage() {
 
     // Load time entries and comments for each task
     const tasksWithMetadata = await Promise.all(
-      (tasksData || []).map(async (task) => {
+      (tasksData || []).map(async (task: any) => {
         // Get total tracked time
         const { data: timeEntries } = await supabaseBrowser
           .from("time_entries")
