@@ -1,10 +1,14 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
-// NOTE: Using direct values to avoid env loading issues during development.
-// In production, move these back to process.env.
-const supabaseUrl = "https://gnciozvdkbkqoqxwbolu.supabase.co";
-const supabaseAnonKey = "sb_publishable_YkrxnAzV5emf7CrEXGpufg_v1SoJmfE";
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error(
+    "Missing Supabase environment variables. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in your .env.local file."
+  );
+}
 
 export async function createSupabaseServerClient() {
   const cookieStore = await cookies();

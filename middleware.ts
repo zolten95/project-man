@@ -2,8 +2,14 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const supabaseUrl = "https://gnciozvdkbkqoqxwbolu.supabase.co";
-const supabaseAnonKey = "sb_publishable_YkrxnAzV5emf7CrEXGpufg_v1SoJmfE";
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error(
+    "Missing Supabase environment variables. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in your .env.local file."
+  );
+}
 
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({
