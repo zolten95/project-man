@@ -69,7 +69,7 @@ export default function MyTasksPage() {
           .eq("task_id", task.id);
 
         const totalTrackedMinutes =
-          timeEntries?.reduce((sum, entry) => sum + entry.minutes, 0) || 0;
+          timeEntries?.reduce((sum: number, entry: any) => sum + entry.minutes, 0) || 0;
 
         // Get comment count
         const { count: commentCount } = await supabaseBrowser

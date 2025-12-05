@@ -259,7 +259,7 @@ export default function TimesheetPage() {
     const dateStart = new Date(date + 'T00:00:00');
     const dateEnd = new Date(date + 'T23:59:59');
     
-    const entriesToDelete = timeEntries.filter(entry => {
+    const entriesToDelete = timeEntries.filter((entry: any) => {
       // Check if entry date matches the target date
       const entryDate = entry.started_at 
         ? new Date(entry.started_at)
@@ -320,7 +320,7 @@ export default function TimesheetPage() {
 
           if (timeEntries) {
             // Filter entries for this specific date
-            const entriesToDelete = timeEntries.filter(entry => {
+            const entriesToDelete = timeEntries.filter((entry: any) => {
               const entryDate = entry.started_at 
                 ? new Date(entry.started_at)
                 : new Date(entry.created_at);
