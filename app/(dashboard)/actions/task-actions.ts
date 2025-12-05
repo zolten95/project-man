@@ -5,6 +5,15 @@ import { revalidatePath } from "next/cache";
 
 const STUDIO_DIRECTION_TEAM_ID = "92e8f38d-5161-4d70-bbdd-772d23cc7373";
 
+export interface TeamMember {
+  user_id: string;
+  role: string | null;
+  profile: {
+    full_name: string;
+    user_id: string;
+  } | null;
+}
+
 export interface CreateTaskInput {
   title: string;
   description?: string;
@@ -185,7 +194,7 @@ export async function getTaskDetails(taskId: string) {
   };
 }
 
-export async function getTeamMembers() {
+export async function getTeamMembers(): Promise<{ data?: TeamMember[]; error?: string }> {
   const supabase = await createSupabaseServerClient();
   
   const { data: { user }, error: userError } = await supabase.auth.getUser();

@@ -1,15 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { createTask, getTeamMembers, type CreateTaskInput } from "../actions/task-actions";
-
-interface TeamMember {
-  user_id: string;
-  profile: {
-    full_name: string;
-    user_id: string;
-  } | null;
-}
+import { createTask, getTeamMembers, type CreateTaskInput, type TeamMember } from "../actions/task-actions";
 
 interface CreateTaskModalProps {
   isOpen: boolean;
@@ -52,7 +44,8 @@ export default function CreateTaskModal({
       setError(result.error);
     } else {
       console.log('Team members loaded:', result.data);
-      setTeamMembers(result.data || []);
+      // TypeScript knows the type from the function signature
+      setTeamMembers((result.data || []) as TeamMember[]);
     }
     setLoadingMembers(false);
   }
