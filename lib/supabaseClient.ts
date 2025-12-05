@@ -9,10 +9,14 @@ if (!supabaseUrl || !supabaseAnonKey) {
   );
 }
 
+// TypeScript now knows these are strings after the check above
+const url: string = supabaseUrl;
+const key: string = supabaseAnonKey;
+
 export function createSupabaseBrowserClient() {
-  return createBrowserClient(supabaseUrl, supabaseAnonKey);
+  return createBrowserClient(url, key);
 }
 
 // For backward compatibility, export a singleton instance
-export const supabaseBrowser = createBrowserClient(supabaseUrl, supabaseAnonKey);
+export const supabaseBrowser = createBrowserClient(url, key);
 

@@ -10,10 +10,14 @@ if (!supabaseUrl || !supabaseAnonKey) {
   );
 }
 
+// TypeScript now knows these are strings after the check above
+const url: string = supabaseUrl;
+const key: string = supabaseAnonKey;
+
 export async function createSupabaseServerClient() {
   const cookieStore = await cookies();
 
-  return createServerClient(supabaseUrl, supabaseAnonKey, {
+  return createServerClient(url, key, {
     cookies: {
       getAll() {
         return cookieStore.getAll();

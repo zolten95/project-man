@@ -11,6 +11,10 @@ if (!supabaseUrl || !supabaseAnonKey) {
   );
 }
 
+// TypeScript now knows these are strings after the check above
+const url: string = supabaseUrl;
+const key: string = supabaseAnonKey;
+
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({
     request: {
@@ -18,7 +22,7 @@ export async function middleware(request: NextRequest) {
     },
   });
 
-  const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
+  const supabase = createServerClient(url, key, {
     cookies: {
       getAll() {
         return request.cookies.getAll();
