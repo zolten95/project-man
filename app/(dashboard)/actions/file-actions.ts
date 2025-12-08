@@ -86,7 +86,7 @@ export async function uploadCommentFile(
       
       // Try to list buckets to show what's available
       const { data: buckets } = await supabaseBrowser.storage.listBuckets();
-      const availableBuckets = buckets?.map(b => `${b.name} (${b.public ? 'public' : 'private'})`).join(', ') || 'none found';
+      const availableBuckets = buckets?.map((b: { name: string; public: boolean }) => `${b.name} (${b.public ? 'public' : 'private'})`).join(', ') || 'none found';
       
       // Provide more helpful error messages
       if (uploadError.message?.includes('Bucket not found') || 

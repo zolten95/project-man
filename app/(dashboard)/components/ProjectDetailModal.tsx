@@ -521,13 +521,13 @@ export default function ProjectDetailModal({
                           <th className="px-4 py-3 text-left text-xs font-medium text-zinc-400 uppercase">
                             Task
                           </th>
-                          {Array.from(
+                          {(Array.from(
                             new Set(
                               timesheetData.tasks.flatMap((t: any) =>
                                 Object.keys(t.daily_time)
                               )
                             )
-                          )
+                          ) as string[])
                             .sort()
                             .map((date: string) => (
                               <th
@@ -552,13 +552,13 @@ export default function ProjectDetailModal({
                               <div className="text-white font-medium">{task.task_title}</div>
                               <div className="text-xs text-zinc-400">{task.task_status}</div>
                             </td>
-                            {Array.from(
+                            {(Array.from(
                               new Set(
                                 timesheetData.tasks.flatMap((t: any) =>
                                   Object.keys(t.daily_time)
                                 )
                               )
-                            )
+                            ) as string[])
                               .sort()
                               .map((date: string) => (
                                 <td key={date} className="px-4 py-3 text-center text-white">
@@ -574,13 +574,13 @@ export default function ProjectDetailModal({
                         ))}
                         <tr className="bg-zinc-800/50 border-t-2 border-zinc-700">
                           <td className="px-4 py-3 font-semibold text-white">Total</td>
-                          {Array.from(
+                          {(Array.from(
                             new Set(
                               timesheetData.tasks.flatMap((t: any) =>
                                 Object.keys(t.daily_time)
                               )
                             )
-                          )
+                          ) as string[])
                             .sort()
                             .map((date: string) => {
                               const dayTotal = timesheetData.tasks.reduce(

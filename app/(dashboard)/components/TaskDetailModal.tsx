@@ -150,10 +150,10 @@ export default function TaskDetailModal({
 
     const updateData: UpdateTaskInput = {
       title: formData.title,
-      assignee_id: formData.assignee_id || null,
-      priority: formData.priority || null,
-      due_date: formData.due_date || null,
-      estimated_time_minutes: estimatedMinutes || null,
+      assignee_id: formData.assignee_id || undefined,
+      priority: formData.priority || undefined,
+      due_date: formData.due_date || undefined,
+      estimated_time_minutes: estimatedMinutes || undefined,
     };
 
     const result = await updateTask(task.id, updateData);
